@@ -1,0 +1,38 @@
+
+Vagrant.configure("2") do |config|
+
+  # * Provider-specific configuration
+  config.vm.provider :libvirt do |libvirt|
+    # * 6GB of memory
+    libvirt.memory = 6144
+    # * 4 cores
+    libvirt.cpus = 4
+    libvirt.qemu_use_session = false
+  end
+
+	# * Base box configuration
+  config.vm.box = "generic/fedora38"
+  config.vm.box_version = "4.3.12"
+
+	# * Provisioning all VMs
+  config.vm.provision "upgrade", type: "shell", privileged: true, before: :all, inline: <<-SHELL
+    echo "[upgrade provision] Upgrading system packages..."
+    dnf upgrade -y
+  SHELL
+
+  # * Virtual machine configuration
+  config.vm.define "noalexanS" do |noalexanS|
+    noalexanS.vm.hostname = "noalexanS"			# ! |
+    noalexanS.vm.network "private_network",	# ! |--- THE NETWORK DON'T WORKS, IT'S SET THE IP ADDRESS TO 192.168.56.[RANDOM], IT MUST BE FIXED
+      ip: "192.168.56.110",									# ! |
+      libvirt__network_dhcp: false					
+  end
+
+  config.vm.define "mayoubSW" do |mayoubSW|
+    mayoubSW.vm.hostname = "mayoubSW"				# ! |
+    mayoubSW.vm.network "private_network",	# ! |--- THE NETWORK DON'T WORKS, IT'S SET THE IP ADDRESS TO 192.168.56.[RANDOM], IT MUST BE FIXED
+      ip: "192.168.56.111",									# ! |
+      libvirt__network_dhcp: false
+  end
+
+end
