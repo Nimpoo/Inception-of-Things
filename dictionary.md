@@ -67,6 +67,7 @@ end
 - `virsh start <vm-name>`: Starts a stopped virtual machine.
 - `virsh shutdown <vm-name>`: Gracefully shuts down a running virtual machine.
 - `virsh destroy <vm-name>`: Forces a virtual machine to stop.
+- `virsh undefine <vm-name>`: Removes the definition of a virtual machine, but does not delete its disk images.
 - `virsh console <vm-name>`: Connects to the console of a running virtual machine.
 
 We use the `qemu:///system` URI to connect to the QEMU hypervisor, here some command to list VMs in this environment (and NOT with the `qemu:///session` URI):
