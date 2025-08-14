@@ -54,6 +54,12 @@ end
 
 - **The relation between `libvirt`, `KVM`, and `QEMU`**: Libvirt acts as a management layer for KVM and QEMU, providing a unified API and set of tools for managing virtual machines. KVM provides the underlying virtualization capabilities, while QEMU handles the emulation of hardware and devices. Together, they enable the creation and management of virtualized environments.
 
+**`QEMU`** = machine (hardware) emulator.
+**`KVM`** = kernel module for Linux to enable virtualization; this is the hypervisor. QEMU can run without KVM but it can be quite a bit slower.
+**`libvirt`** = virtualization library which wraps QEMU and KVM to provide APIs for use by other programs, such as Vagrant, which is a tool for creating virtualized development environments
+
+Vagrant uses `libvirt`, and `libvirt` uses `QEMU` and `KVM`.
+
 - **`virsh`**: `virsh` is a command-line interface for managing virtual machines through the libvirt API. It allows users to perform various tasks such as starting, stopping, and managing virtual machines, as well as configuring networks and storage.
 
 I personally chose `libvirt` as provider because it's native to most Linux Distribution instead of Virtual Box for exemple. But it requires more configuration compared to other providers. We need to install the plugin `vagrant-libvirt`, here the [official documentation](https://vagrant-libvirt.github.io/vagrant-libvirt/).
@@ -61,10 +67,10 @@ I personally chose `libvirt` as provider because it's native to most Linux Distr
 ## 1.3 Some useful commands
 
 ### 1.3.1 `vagrant` commands
-- `vagrant init generic/fedora38 --box-version 4.3.12`: Initializes a new Vagrant environment with the specified box and version.
+- `vagrant init generic/fedora28 --box-version 4.3.12`: Initializes a new Vagrant environment with the specified box and version.
   - `vagrant`: command-line tool for managing Vagrant environments.
   - `init`: command to create a new Vagrantfile.
-  - `generic/fedora38`: the name of the base box to use.
+  - `generic/fedora28`: the name of the base box to use.
   - `--box-version 4.3.12`: specifies the version of the box to use.
 - `vagrant up`: Starts the Vagrant environment and provisions the virtual machine.
 - `vagrant halt`: Stops the running Vagrant environment.
