@@ -40,9 +40,23 @@ end
 
 - **Provisioning**: Provisioning is the process of configuring and setting up the software and services within a Vagrant environment. Vagrant supports various provisioning methods, including shell scripts, Ansible, Chef, and Puppet. This allows developers to automate the setup of their development environments and ensure consistency across different machines.
 
+- **Provider**: A provider is a plugin that Vagrant uses to manage different virtualization technologies. Providers are responsible for creating, configuring, and managing the virtual machines. Some popular providers include **VirtualBox**, **VMware**, **HyperV**, **libvirt**, etc...
+
 ## 1.2 Vagrant with `libvirt`
 
-<!-- TODO: explain all the micmac about the installation of the plugin `vagrant-libvirt`, and explain WHAT IS `libvirt`, `KVM`, `QEMU` and all other things how can creates some confusion -->
+- **`libvirt`**: Libvirt is an open-source API, daemon, and management tool for managing platform virtualization technologies. It provides a consistent interface for interacting with different hypervisors like KVM, QEMU, and others. Libvirt simplifies the management of virtual machines, networks, and storage by providing a unified set of commands and tools.
+
+### _What is `libvirt`, `KVM`, and `QEMU` ?_
+
+- **`KVM`**: KVM (Kernel-based Virtual Machine) is a virtualization technology built into the Linux kernel that allows the kernel to function as a hypervisor. It enables the creation and management of virtual machines on Linux systems, providing hardware virtualization capabilities.
+
+- **`QEMU`**: QEMU (Quick Emulator) is an open-source machine emulator and virtualizer. It allows users to run virtual machines with different architectures and operating systems on a host machine. QEMU can be used in conjunction with KVM to provide full virtualization capabilities.
+
+- **The relation between `libvirt`, `KVM`, and `QEMU`**: Libvirt acts as a management layer for KVM and QEMU, providing a unified API and set of tools for managing virtual machines. KVM provides the underlying virtualization capabilities, while QEMU handles the emulation of hardware and devices. Together, they enable the creation and management of virtualized environments.
+
+- **`virsh`**: `virsh` is a command-line interface for managing virtual machines through the libvirt API. It allows users to perform various tasks such as starting, stopping, and managing virtual machines, as well as configuring networks and storage.
+
+I personally chose `libvirt` as provider because it's native to most Linux Distribution instead of Virtual Box for exemple. But it requires more configuration compared to other providers. We need to install the plugin `vagrant-libvirt`, here the [official documentation](https://vagrant-libvirt.github.io/vagrant-libvirt/).
 
 ## 1.3 Some useful commands
 
