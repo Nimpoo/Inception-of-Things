@@ -11,17 +11,34 @@ Vagrant.configure("2") do |config|
     libvirt.driver = "kvm"
   end
 
-  config.vm.box = "generic/fedora28"
+  config.vm.box = "generic/fedora38"
   config.vm.box_version = "4.3.12"
 
-  config.vm.synced_folder "test/", "/vagrant_test",
+  config.vm.synced_folder "synced_folder_nfs/", "/synced_folder_nfs/",
     type: "nfs",
-    mount_options: ["vers=4", "tcp"]
+    nfs_version: 4
 
 	# * Provisioning all VMs
-  config.vm.provision "upgrade", type: "shell", privileged: true, before: :all, inline: <<-SHELL
+  config.vm.provision "upgrade",
+    type: "shell",
+    privileged: true,
+    before: :all,
+
+    inline: <<-SHELL
     echo "[upgrade provision] Upgrading system packages..."
     sudo dnf upgrade --refresh -y
+  SHELL
+
+  # * Firewalls configuration
+  config.vm.provision "firewall",
+    type: "shell",
+    privileged: true,
+
+    inline: <<-SHELL
+    firewall-cmd --permanent --add-port=6443/tcp #apiserver
+    firewall-cmd --permanent --zone=trusted --add-source=10.42.0.0/16 #pods
+    firewall-cmd --permanent --zone=trusted --add-source=10.43.0.0/16 #services
+    firewall-cmd --reload
   SHELL
 
   # * Base box configuration
@@ -31,6 +48,15 @@ Vagrant.configure("2") do |config|
       libvirt__host_ip: "192.168.56.1",
       libvirt__network_name: "vagrant-libvirt-p1",
       libvirt__dhcp_enabled: false
+
+    noalexanS.vm.provision "k3s - controller mode",
+      type: "shell",
+
+      inline: <<-SHELL
+      echo "[k3s provision] Installing k3s in controller mode (creation of the cluster)..."
+      curl -sfL https://get.k3s.io | sh -
+      cp -fv /var/lib/rancher/k3s/server/node-token /synced_folder_nfs/
+    SHELL
   end
 
   config.vm.define "mayoubSW" do |mayoubSW|
@@ -39,6 +65,24 @@ Vagrant.configure("2") do |config|
       libvirt__host_ip: "192.168.56.1",
       libvirt__network_name: "vagrant-libvirt-p1",
       libvirt__dhcp_enabled: false
+
+    mayoubSW.vm.provision "k3s - agent mode",
+      type: "shell",
+
+      inline: <<-SHELL
+      export SECONDS=0
+      echo "[k3s provision] Installing k3s in agent mode..."
+
+      while [ ! -e /synced_folder_nfs/node-token ]; do
+        echo "[k3s provision] Waiting about $SECONDS seconds for node-token to be available..."
+        sleep 10
+        export SECONDS=$((SECONDS+10))
+      done
+
+      export K3S_TOKEN=$(cat /synced_folder_nfs/node-token)
+      echo "[k3s provision] Has waited for $SECONDS seconds."
+      curl -sfL https://get.k3s.io | K3S_URL=https://192.168.56.110:6443 K3S_TOKEN=$K3S_TOKEN sh -
+    SHELL
   end
 
 end
