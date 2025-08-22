@@ -1,4 +1,3 @@
-
 Vagrant.configure("2") do |config|
 
   # * Provider-specific configuration
@@ -11,44 +10,43 @@ Vagrant.configure("2") do |config|
     libvirt.driver = "kvm"
   end
 
-  config.vm.box = "generic/fedora38"
+  # * Box distribution
+  config.vm.box = "generic/ubuntu1804"
   config.vm.box_version = "4.3.12"
 
+  # * NFS synced folder configuration
   config.vm.synced_folder "synced_folder_nfs/", "/synced_folder_nfs/",
     type: "nfs",
     nfs_version: 4
 
 	# * Provisioning all VMs
-  config.vm.provision "upgrade",
+  config.vm.provision "upgrade and firewall",
     type: "shell",
     privileged: true,
     before: :all,
 
     inline: <<-SHELL
-    echo "[upgrade provision] Upgrading system packages..."
-    sudo dnf upgrade --refresh -y
-  SHELL
+    echo "[upgrade and firewall provision] Upgrading system packages..."
+    sudo apt-get --fix-broken install -y
+    sudo apt-get update
+    sudo apt-get upgrade -y
 
-  # * Firewalls configuration
-  config.vm.provision "firewall",
-    type: "shell",
-    privileged: true,
-
-    inline: <<-SHELL
-    firewall-cmd --permanent --add-port=6443/tcp #apiserver
-    firewall-cmd --permanent --zone=trusted --add-source=10.42.0.0/16 #pods
-    firewall-cmd --permanent --zone=trusted --add-source=10.43.0.0/16 #services
-    firewall-cmd --reload
+    ufw allow 6443/tcp #apiserver
+    ufw allow from 10.42.0.0/16 to any #pods
+    ufw allow from 10.43.0.0/16 to any #services
   SHELL
 
   # * Base box configuration
   config.vm.define "noalexanS" do |noalexanS|
     noalexanS.vm.hostname = "noalexanS"
+
+    # * Network configuration
     noalexanS.vm.network :private_network, ip: "192.168.56.110",
       libvirt__host_ip: "192.168.56.1",
       libvirt__network_name: "vagrant-libvirt-p1",
       libvirt__dhcp_enabled: false
 
+    # * K3s installation in controller mode
     noalexanS.vm.provision "k3s - controller mode",
       type: "shell",
 
@@ -61,11 +59,14 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "mayoubSW" do |mayoubSW|
     mayoubSW.vm.hostname = "mayoubSW"
+
+    # * Network configuration
     mayoubSW.vm.network :private_network, ip: "192.168.56.111",
       libvirt__host_ip: "192.168.56.1",
       libvirt__network_name: "vagrant-libvirt-p1",
       libvirt__dhcp_enabled: false
 
+    # * K3s installation in agent mode
     mayoubSW.vm.provision "k3s - agent mode",
       type: "shell",
 
