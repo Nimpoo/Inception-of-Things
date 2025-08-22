@@ -8,7 +8,7 @@ up:
 	if [ ! -d synced_folder_nfs ]; then \
 		mkdir -v synced_folder_nfs; \
 	fi
-	$(VAGRANT_CMD) up $(VM_NAME)
+	$(VAGRANT_CMD) up $(VM_NAME) --provider=$(PROVIDER)
 
 up-all:
 	if [ ! -d synced_folder_nfs ]; then \
