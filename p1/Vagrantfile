@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
       echo "[k3s provision] Installing k3s in controller mode (creation of the cluster)..."
       curl -sfL https://get.k3s.io | sh -
       cp -fv /var/lib/rancher/k3s/server/node-token /synced_folder_nfs/
-      sudo chown -v $USER:$USER /etc/rancher/k3s/k3s.yaml
+      sudo chown -v vagrant:vagrant /etc/rancher/k3s/k3s.yaml
     SHELL
   end
 

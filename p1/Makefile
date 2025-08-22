@@ -45,4 +45,6 @@ virsh-net-destroy:
 	-$(VIRSH_CMD) $(VIRSH_FLAGS) net-destroy vagrant-libvirt
 	-$(VIRSH_CMD) $(VIRSH_FLAGS) net-undefine vagrant-libvirt
 
-.PHONY: up up-all reload reload-all halt destroy destroy-box virsh-destroy virsh-net-destroy
+re: destroy up-all
+
+.PHONY: up up-all reload reload-all halt destroy destroy-box virsh-destroy virsh-net-destroy re
