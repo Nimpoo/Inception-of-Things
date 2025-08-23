@@ -1,0 +1,56 @@
+Vagrant.configure("2") do |config|
+
+  # * Provider-specific configuration
+  config.vm.provider :libvirt do |libvirt|
+    # * 6GB of memory
+    libvirt.memory = 6144
+    # * 4 cores
+    libvirt.cpus = 4
+    libvirt.qemu_use_session = false
+    libvirt.driver = "kvm"
+  end
+
+  # * Box distribution
+  config.vm.box = "generic/ubuntu1804"
+  config.vm.box_version = "4.3.12"
+
+	# * Provisioning all VMs
+  config.vm.provision "upgrade and firewall",
+    type: "shell",
+    privileged: true,
+    before: :all,
+
+    inline: <<-SHELL
+    echo "[upgrade and firewall provision] Upgrading system packages..."
+    sudo apt-get --fix-broken install -y
+    sudo apt-get update
+    sudo apt-get upgrade -y
+
+    ufw allow 6443/tcp #apiserver
+    ufw allow from 10.42.0.0/16 to any #pods
+    ufw allow from 10.43.0.0/16 to any #services
+  SHELL
+
+  # * Base box configuration
+  config.vm.define "noalexanS" do |noalexanS|
+    noalexanS.vm.hostname = "noalexanS"
+
+    # * Network configuration
+    noalexanS.vm.network :private_network, ip: "192.168.56.110",
+      libvirt__host_ip: "192.168.56.1",
+      libvirt__network_name: "vagrant-libvirt-p1",
+      libvirt__dhcp_enabled: false
+
+    # * K3s installation in controller mode
+    noalexanS.vm.provision "k3s - controller mode",
+      type: "shell",
+
+      inline: <<-SHELL
+      echo "[k3s provision] Installing k3s in controller mode (creation of the cluster)..."
+      curl -sfL https://get.k3s.io | sh -
+      sudo chown -v vagrant:vagrant /etc/rancher/k3s/k3s.yaml
+    SHELL
+
+  end
+
+end
