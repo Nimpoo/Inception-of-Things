@@ -2,10 +2,10 @@ Vagrant.configure("2") do |config|
 
   # * Provider-specific configuration
   config.vm.provider :libvirt do |libvirt|
-    # * 6GB of memory
-    libvirt.memory = 6144
-    # * 4 cores
-    libvirt.cpus = 4
+    # * 8GB of memory
+    libvirt.memory = 8192
+    # * 6 cores
+    libvirt.cpus = 6
     libvirt.qemu_use_session = false
     libvirt.driver = "kvm"
   end
