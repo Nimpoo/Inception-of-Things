@@ -21,8 +21,8 @@ destroy-box:
 	$(VAGRANT_CMD) box remove $(BOX_NAME) --force
 
 virsh-destroy:
-	-$(VIRSH_CMD) $(VIRSH_FLAGS) destroy --domain p1_noalexanS
-	-$(VIRSH_CMD) $(VIRSH_FLAGS) undefine --domain p1_noalexanS --remove-all-storage
+	-$(VIRSH_CMD) $(VIRSH_FLAGS) destroy --domain p2_noalexanS
+	-$(VIRSH_CMD) $(VIRSH_FLAGS) undefine --domain p2_noalexanS --remove-all-storage
 
 virsh-net-destroy:
 	-$(VIRSH_CMD) $(VIRSH_FLAGS) net-destroy vagrant-libvirt-p1
