@@ -32,4 +32,4 @@ virsh-net-destroy:
 
 re: destroy up
 
-.PHONY: up reload destroy-box virsh-destroy virsh-net-destroy
+.PHONY: up reload halt destroy-box virsh-destroy virsh-net-destroy
