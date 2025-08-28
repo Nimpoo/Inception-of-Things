@@ -51,6 +51,51 @@ Vagrant.configure("2") do |config|
       sudo chown -v vagrant:vagrant /etc/rancher/k3s/k3s.yaml
     SHELL
 
+    noalexanS.vm.provision "file", source: "./apps", destination: "/home/vagrant/apps"
+
+    noalexanS.vm.provision "deploy app1",
+      type: "shell",
+
+      inline: <<-SHELL
+      echo "[deploy app1] Applying Kubernetes manifests (Creation of configmap, and apply Deployment and Service)..."
+      kubectl create configmap nginx-app1-html --from-file=/home/vagrant/apps/app1/index-app1.html
+      kubectl apply -f /home/vagrant/apps/app1/deployment-app1.yaml
+      kubectl apply -f /home/vagrant/apps/app1/service-app1.yaml
+    SHELL
+
+    noalexanS.vm.provision "deploy app2",
+      type: "shell",
+
+      inline: <<-SHELL
+      echo "[deploy app2] Applying Kubernetes manifests (Creation of configmap, and apply Deployment and Service)..."
+      kubectl create configmap nginx-app2-html --from-file=/home/vagrant/apps/app2/index-app2.html
+      kubectl apply -f /home/vagrant/apps/app2/deployment-app2.yaml
+      kubectl apply -f /home/vagrant/apps/app2/service-app2.yaml
+    SHELL
+
+    noalexanS.vm.provision "deploy app3",
+      type: "shell",
+
+      inline: <<-SHELL
+      echo "[deploy app3] Applying Kubernetes manifests (Creation of configmap, and apply Deployment and Service)..."
+      kubectl create configmap nginx-app3-html --from-file=/home/vagrant/apps/app3/index-app3.html
+      kubectl apply -f /home/vagrant/apps/app3/deployment-app3.yaml
+      kubectl apply -f /home/vagrant/apps/app3/service-app3.yaml
+    SHELL
+
+    noalexanS.vm.provision "deploy ingress",
+      type: "shell",
+
+      inline: <<-SHELL
+      echo "[deploy ingress] Applying Ingress..."
+      kubectl apply -f /home/vagrant/apps/ingress.yaml
+    SHELL
   end
 
 end
+
+# ! Tu as besoin de:
+# TODO: - Comprendre comment acceder aux autres apps (app1 et app2 car app3 est par defaut avec l'adresse IP de la node)
+# TODO: - AFFICHER LE NOM DU POD SUR LES FICHIERS HTMLS DES 3 APPS app1, app2 et app3 (exemple - Pod: nginx-app1-b89d48b86-lvlx2) + AFFICHER L'OS DE LA NODE (exemple - Node: Linux fedora 6.15.10-200.fc42.x86_64)
+# TODO: - Creation des 3 Namespaces pour les 3 apps differents
+# TODO: - Adapter aux exigences du sujet
