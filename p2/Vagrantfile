@@ -93,9 +93,3 @@ Vagrant.configure("2") do |config|
   end
 
 end
-
-# ! Tu as besoin de:
-# TODO: - Comprendre comment acceder aux autres apps (app1 et app2 car app3 est par defaut avec l'adresse IP de la node)
-# TODO: - AFFICHER LE NOM DU POD SUR LES FICHIERS HTMLS DES 3 APPS app1, app2 et app3 (exemple - Pod: nginx-app1-b89d48b86-lvlx2) + AFFICHER L'OS DE LA NODE (exemple - Node: Linux fedora 6.15.10-200.fc42.x86_64)
-# TODO: - Creation des 3 Namespaces pour les 3 apps differents
-# TODO: - Adapter aux exigences du sujet
