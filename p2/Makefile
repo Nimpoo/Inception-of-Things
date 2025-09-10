@@ -27,6 +27,8 @@ virsh-destroy:
 virsh-net-destroy:
 	-$(VIRSH_CMD) $(VIRSH_FLAGS) net-destroy vagrant-libvirt-p2
 	-$(VIRSH_CMD) $(VIRSH_FLAGS) net-undefine vagrant-libvirt-p2
+	-$(VIRSH_CMD) $(VIRSH_FLAGS) net-destroy vagrant-libvirt
+	-$(VIRSH_CMD) $(VIRSH_FLAGS) net-undefine vagrant-libvirt
 
 re: destroy up
 
