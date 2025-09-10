@@ -22,4 +22,7 @@ curl -fsSL https://get.docker.com -o install-docker.sh
 
 sudo sh install-docker.sh
 
+sudo systemctl enable docker
+sudo systemctl start docker
+
 sudo rm -rfv install-docker.sh
