@@ -83,3 +83,6 @@ EOF
 }
 
 do_uninstall
+
+# K3d uninstallation
+sudo rm -v $(which k3d)
