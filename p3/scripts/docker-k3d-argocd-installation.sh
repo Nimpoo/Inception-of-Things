@@ -28,5 +28,18 @@ sudo systemctl start docker
 
 sudo rm -rfv install-docker.sh
 
+# kubectl installation
+sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+if echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check; then
+  echo "kubectl checksum is valid"
+else
+  echo "kubectl checksum is invalid"
+  exit 1
+fi
+
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+sudo rm -rfv kubectl kubectl.sha256
+
 # K3d installation
 curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash

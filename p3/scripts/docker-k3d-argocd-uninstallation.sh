@@ -84,7 +84,12 @@ sudo docker volume rm $(sudo docker volume ls -q) || true
 sudo docker network prune -f || true
 sudo docker system prune -a -f || true
 
+sudo k3d cluster delete --all || true
+
 do_uninstall
+
+# kubectl uninstallation
+sudo rm -v $(which kubectl)
 
 # K3d uninstallation
 sudo rm -v $(which k3d)
