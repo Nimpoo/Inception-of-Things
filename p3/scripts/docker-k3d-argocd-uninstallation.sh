@@ -50,7 +50,6 @@ EOF
                 $sh_c 'rm -rf /var/lib/containerd'
             )
             echo "Docker a été désinstallé avec succès."
-            exit 0
             ;;
         centos|fedora|rhel)
             (
@@ -70,17 +69,20 @@ EOF
                 $sh_c 'rm -rf /var/lib/containerd'
             )
             echo "Docker a été désinstallé avec succès."
-            exit 0
             ;;
         *)
             echo
             echo "ERROR: Distribution '$lsb_dist' non supportée."
             echo
-            exit 1
             ;;
     esac
-    exit 1
 }
+
+sudo docker stop $(sudo docker ps -aq) || true
+sudo docker rm $(sudo docker ps -aq) || true
+sudo docker volume rm $(sudo docker volume ls -q) || true
+sudo docker network prune -f || true
+sudo docker system prune -a -f || true
 
 do_uninstall
 
