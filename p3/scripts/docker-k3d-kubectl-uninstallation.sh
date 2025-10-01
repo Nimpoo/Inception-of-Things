@@ -93,3 +93,6 @@ sudo rm -v $(which kubectl)
 
 # K3d uninstallation
 sudo rm -v $(which k3d)
+
+# argocd uninstallation
+sudo rm -v $(which argocd)
