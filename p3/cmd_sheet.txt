@@ -1,0 +1,30 @@
+# `k3d`
+- k3d cluster create --no-lb --agents 0 p3-cluster -> create a cluster with only 1 server (master node), 0 agent and no loadbalancer, named `p3-cluster`
+- k3d cluster delete [CLUSTER_NAME]
+- k3d cluster delete --all
+- k3d cluster ls
+- k3d node ls
+- k3d node delete [NODE_NAME]
+- k3d node delete --all
+
+# `kubectl`
+- kubectl cluster-info
+- kubectl config get-contexts -> List all contexts
+- kubectl config delete-context [CONTEXT]
+- kubectl get all -> get all objects in the cluster ONLY objects in `running` status
+- kubectl get all -A -> get all objects in the cluster whatever the status, `running`, `complete`, etc...
+- kubectl get [object] -A -> get all *this* type of object in the cluster
+- kubectl get [object] -n [namespace_to_get_the_objects]
+- kubectl get namespace
+- kubectl get endpoints -> Display all the endpoints of your clusters
+- kubectl logs -n [namespace] [object_from_the_namespace_specified]
+- kubectl config view -> display merged kubeconfig settings or a specified kubeconfig file (display the `~/.kube/config` or `~/root/.kube/config` file)
+- kubectl create namespace [name]
+- kubectl port-forward svc/argocd-server -n argocd 8080:443 -> port-forward theArgo CD server to access to it with the URL `https://localhost:8080`
+- kubectl delete secret -n argocd argocd-initial-admin-secret -> delete the `secret` object where the admin password of the ArgoCD server is stored
+
+# `argocd`
+- argocd admin initial-password -n argocd -> display the auto-generated password at the installation of Argo CD in its namespace in the cluster for the user `admin`
+- argocd account update-password -> update a new password for the user `admin`
+- argocd login [ARGOCD_SERVER_NAME] -> If you port-forward to your 8080 port the ArgoCD server, it will be `localhost:8080`
+- argocd login [ARGOCD_SERVER_NAME] --username=<username> --password=<password>
