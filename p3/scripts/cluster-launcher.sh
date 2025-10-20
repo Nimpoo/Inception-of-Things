@@ -52,13 +52,19 @@ sudo kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-
 # * sudo kubectl delete secret -n argocd argocd-initial-admin-secret
 # * ```
 
-# ? IV - Changer le mot de passe de l'utilisateur admin
+# ? IV - Se connecter via Argo CD CLI
+# * ```
+# * sudo argocd login localhost:8080 --username admin --password <password>
+# * ```
+
+# ? V - Changer le mot de passe de l'utilisateur admin
 # * ```
 # * sudo argocd account update-password
 # * ```
 
-# ? V - Ajouter le cluster k3d au CLI Argo CD
+# ? VI - Ajouter le cluster k3d au CLI Argo CD
 # * ```
 # * sudo argocd cluster add k3d-p3-cluster
 # * ```
 # ! S'il y a un probleme lors de l'ajout du cluster k3d au CLI Argo CD, consulter : https://github.com/Nimpoo/Inception-of-Things/wiki/V-%E2%80%90-ArgoCD,-CI-CD,-GitOps-Model#warning
+# ! COMMANDE NON NECESSAIRE, VOIR ICI : https://github.com/Nimpoo/Inception-of-Things/wiki/V-%E2%80%90-ArgoCD,-CI-CD,-GitOps-Model#important-edit
