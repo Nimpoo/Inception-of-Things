@@ -28,3 +28,5 @@
 - argocd account update-password -> update a new password for the user `admin`
 - argocd login [ARGOCD_SERVER_NAME] -> If you port-forward to your 8080 port the ArgoCD server, it will be `localhost:8080`
 - argocd login [ARGOCD_SERVER_NAME] --username=<username> --password=<password>
+- argocd cluster list
+- argocd cluster rm
