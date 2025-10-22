@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 
 command_exists() {
     command -v "$@" > /dev/null 2>&1
@@ -96,3 +95,6 @@ sudo rm -v $(which k3d)
 
 # argocd uninstallation
 sudo rm -v $(which argocd)
+
+# helm uninstallation
+sudo rm -v $(which helm)
