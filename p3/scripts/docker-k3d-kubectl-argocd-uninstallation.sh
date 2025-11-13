@@ -95,6 +95,3 @@ sudo rm -v $(which k3d)
 
 # argocd uninstallation
 sudo rm -v $(which argocd)
-
-# helm uninstallation
-sudo rm -v $(which helm)
