@@ -20,7 +20,8 @@
 - kubectl logs -n [namespace] [object_from_the_namespace_specified]
 - kubectl config view -> display merged kubeconfig settings or a specified kubeconfig file (display the `~/.kube/config` or `~/root/.kube/config` file)
 - kubectl create namespace [name]
-- kubectl port-forward svc/argocd-server -n argocd 8080:443 -> port-forward theArgo CD server to access to it with the URL `https://localhost:8080`
+- kubectl port-forward svc/argocd-server -n argocd 8080:443 -> port-forward the Argo CD server to access to it with the URL `https://localhost:8080`
+- kubectl port-forward svc/doom -n dev 8090:6901 -> port-forward the application Doom server to access to it with the URL `https://localhost:8090`
 - kubectl delete secret -n argocd argocd-initial-admin-secret -> delete the `secret` object where the admin password of the ArgoCD server is stored
 
 # `argocd`
