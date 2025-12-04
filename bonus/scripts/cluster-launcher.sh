@@ -51,8 +51,8 @@ echo -e "\e[1;34m* helm is installed.\e[0m"
 sudo k3d cluster create --no-lb --agents 0 bonus-cluster
 sudo kubectl create namespace dev
 sudo kubectl create namespace gitlab
-# sudo kubectl create namespace argocd
-# sudo kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+sudo kubectl create namespace argocd
+sudo kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 # ? I - Lancer cette commande pour port forwarding le dashboard Argo CD sur le port 8080 de la machine hôte et y accéder via http://localhost:8080
 # * ```
 # * sudo kubectl port-forward svc/argocd-server -n argocd 8080:443
@@ -88,7 +88,11 @@ echo ""
 
 echo "Checking GitLab Workhorse image signature with Cosign..."
 wget https://charts.gitlab.io/cosign.pub
-cosign verify --key cosign.pub registry.gitlab.com/gitlab-org/build/cng/gitlab-workhorse-ee:v16.9.0 | jq -r
+if ! cosign verify --key cosign.pub registry.gitlab.com/gitlab-org/build/cng/gitlab-workhorse-ee:v16.9.0 | jq -r; then
+  echo "Error: GitLab Workhorse image signature verification failed." >&2
+  rm -fv cosign.pub
+  exit 1
+fi
 rm -fv cosign.pub
 
 echo "Installing GitLab Runners via Helm Chart..."
@@ -98,12 +102,15 @@ sudo helm upgrade --install gitlab gitlab/gitlab \
   --timeout 600s \
   --set certmanager-issuer.email=marwan0620@gmail.com \
   --set global.hosts.domain=bonus.com \
-	--set global.hosts.gitlab.name=gitlab.bonus.com \
+  --set global.hosts.gitlab.name=gitlab.bonus.com \
   --set global.hosts.https=false \
+  --set global.ingress.tls.enabled=false \
   --set global.edition=ce \
+  --set gitlab-runner.install=false \
   --namespace gitlab
 
 tput setaf 1
+tput bold
 echo "Press ANY KEY to continue and display the GITLAB INITIAL ROOT PASSWORD..."
 tput sgr0
 read -n 1 -s -r -p ""
@@ -116,10 +123,5 @@ sudo kubectl get secret gitlab-gitlab-initial-root-password -n gitlab -ojsonpath
 # * sudo kubectl port-forward -n gitlab svc/gitlab-webservice-default 8081:8181
 # * ```
 # ! PORT FORWARDING, BLOQUE LE PROMPT, LANCE GITLAB SUR LE PORT 8081
-
-# ? VII - Checker les logs du GitLab Runner
-# * ```
-# * sudo kubectl logs --selector=app=gitlab-gitlab-runner --namespace gitlab
-# * ```
 
 # TODO: COMPRENDRE COMMENT SE CONNECTER AU DASHBOARD DE GITLAB PARCE QUE JE VAIS ME DEFENESTRER

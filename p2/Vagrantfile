@@ -51,16 +51,16 @@ Vagrant.configure("2") do |config|
       sudo chown -v vagrant:vagrant /etc/rancher/k3s/k3s.yaml
     SHELL
 
-    noalexanS.vm.provision "file", source: "./apps", destination: "/home/vagrant/apps"
+    noalexanS.vm.provision "file", source: "./confs", destination: "/home/vagrant/confs"
 
     noalexanS.vm.provision "deploy app1",
       type: "shell",
 
       inline: <<-SHELL
       echo "[deploy app1] Applying Kubernetes manifests (Creation of configmap, and apply Deployment and Service)..."
-      kubectl create configmap nginx-app1-html --from-file=/home/vagrant/apps/app1/index-app1.html
-      kubectl apply -f /home/vagrant/apps/app1/deployment-app1.yaml
-      kubectl apply -f /home/vagrant/apps/app1/service-app1.yaml
+      kubectl create configmap nginx-app1-html --from-file=/home/vagrant/confs/app1/index-app1.html
+      kubectl apply -f /home/vagrant/confs/app1/deployment-app1.yaml
+      kubectl apply -f /home/vagrant/confs/app1/service-app1.yaml
     SHELL
 
     noalexanS.vm.provision "deploy app2",
@@ -68,9 +68,9 @@ Vagrant.configure("2") do |config|
 
       inline: <<-SHELL
       echo "[deploy app2] Applying Kubernetes manifests (Creation of configmap, and apply Deployment and Service)..."
-      kubectl create configmap nginx-app2-html --from-file=/home/vagrant/apps/app2/index-app2.html
-      kubectl apply -f /home/vagrant/apps/app2/deployment-app2.yaml
-      kubectl apply -f /home/vagrant/apps/app2/service-app2.yaml
+      kubectl create configmap nginx-app2-html --from-file=/home/vagrant/confs/app2/index-app2.html
+      kubectl apply -f /home/vagrant/confs/app2/deployment-app2.yaml
+      kubectl apply -f /home/vagrant/confs/app2/service-app2.yaml
     SHELL
 
     noalexanS.vm.provision "deploy app3",
@@ -78,9 +78,9 @@ Vagrant.configure("2") do |config|
 
       inline: <<-SHELL
       echo "[deploy app3] Applying Kubernetes manifests (Creation of configmap, and apply Deployment and Service)..."
-      kubectl create configmap nginx-app3-html --from-file=/home/vagrant/apps/app3/index-app3.html
-      kubectl apply -f /home/vagrant/apps/app3/deployment-app3.yaml
-      kubectl apply -f /home/vagrant/apps/app3/service-app3.yaml
+      kubectl create configmap nginx-app3-html --from-file=/home/vagrant/confs/app3/index-app3.html
+      kubectl apply -f /home/vagrant/confs/app3/deployment-app3.yaml
+      kubectl apply -f /home/vagrant/confs/app3/service-app3.yaml
     SHELL
 
     noalexanS.vm.provision "deploy ingress",
@@ -88,7 +88,7 @@ Vagrant.configure("2") do |config|
 
       inline: <<-SHELL
       echo "[deploy ingress] Applying Ingress..."
-      kubectl apply -f /home/vagrant/apps/ingress.yaml
+      kubectl apply -f /home/vagrant/confs/ingress.yaml
     SHELL
   end
 
