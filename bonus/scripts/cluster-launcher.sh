@@ -4,12 +4,12 @@ set -e
 
 ###
 
-if [ "$(id -u)" -ne 0 ]; then
-	echo "This script must be run as root." >&2
+if ! groups "$USER" | grep -q '\bdocker\b'; then
+	echo "User must be in the docker group to run this script." >&2
 	exit 1
 fi
 
-echo -e "\e[1;34m* root privileges granted.\e[0m"
+echo -e "\e[1;34m* docker group access verified.\e[0m"
 
 if ! command -v docker >/dev/null 2>&1; then
 	echo "Docker is not installed. Please install Docker and try again." >&2
