@@ -31,10 +31,10 @@ fi
 
 ###
 
-sudo k3d cluster create --no-lb --agents 0 p3-cluster
-sudo kubectl create namespace dev
-sudo kubectl create namespace argocd
-sudo kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+k3d cluster create --no-lb --agents 0 p3-cluster
+kubectl create namespace dev
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 # ? I - Lancer cette commande pour port forwarding le dashboard Argo CD sur le port 8080 de la machine hôte et y accéder via http://localhost:8080
 # * ```
 # * sudo kubectl port-forward svc/argocd-server -n argocd 8080:443

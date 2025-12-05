@@ -8,7 +8,7 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # Docker installation
-sudo dnf remove docker \
+dnf remove docker \
                 docker-client \
                 docker-client-latest \
                 docker-common \
@@ -21,12 +21,12 @@ sudo dnf remove docker \
 
 curl -fsSL https://get.docker.com -o install-docker.sh
 
-sudo sh install-docker.sh
+sh install-docker.sh
 
-sudo systemctl enable docker
-sudo systemctl start docker
+systemctl enable docker
+systemctl start docker
 
-sudo rm -rfv install-docker.sh
+rm -rfv install-docker.sh
 
 # kubectl installation
 sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -38,8 +38,8 @@ else
   exit 1
 fi
 
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-sudo rm -rfv kubectl kubectl.sha256
+install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+rm -rfv kubectl kubectl.sha256
 
 # K3d installation
 curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash

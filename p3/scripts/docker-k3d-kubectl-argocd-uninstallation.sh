@@ -77,21 +77,21 @@ EOF
     esac
 }
 
-sudo docker stop $(sudo docker ps -aq) || true
-sudo docker rm $(sudo docker ps -aq) || true
-sudo docker volume rm $(sudo docker volume ls -q) || true
-sudo docker network prune -f || true
-sudo docker system prune -a -f || true
+docker stop $(docker ps -aq) || true
+docker rm $(docker ps -aq) || true
+docker volume rm $(docker volume ls -q) || true
+docker network prune -f || true
+docker system prune -a -f || true
 
-sudo k3d cluster delete --all || true
+k3d cluster delete --all || true
 
 do_uninstall
 
 # kubectl uninstallation
-sudo rm -v $(which kubectl)
+rm -v $(which kubectl)
 
 # K3d uninstallation
-sudo rm -v $(which k3d)
+rm -v $(which k3d)
 
 # argocd uninstallation
-sudo rm -v $(which argocd)
+rm -v $(which argocd)

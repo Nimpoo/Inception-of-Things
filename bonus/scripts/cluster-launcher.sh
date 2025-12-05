@@ -48,11 +48,11 @@ echo -e "\e[1;34m* helm is installed.\e[0m"
 
 ###
 
-sudo k3d cluster create --no-lb --agents 0 bonus-cluster
-sudo kubectl create namespace dev
-sudo kubectl create namespace gitlab
-sudo kubectl create namespace argocd
-sudo kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+k3d cluster create --no-lb --agents 0 bonus-cluster
+kubectl create namespace dev
+kubectl create namespace gitlab
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 # ? I - Lancer cette commande pour port forwarding le dashboard Argo CD sur le port 8080 de la machine hôte et y accéder via http://localhost:8080
 # * ```
 # * sudo kubectl port-forward svc/argocd-server -n argocd 8080:443
