@@ -5,14 +5,14 @@ VIRSH_CMD := virsh
 VIRSH_FLAGS := --connect qemu:///system
 
 up:
-	if [ ! -d synced_folder_nfs ]; then \
-		mkdir -v synced_folder_nfs; \
+	if [ ! -d ../synced_folder_nfs ]; then \
+		mkdir -v ../synced_folder_nfs; \
 	fi
 	$(VAGRANT_CMD) up $(VM_NAME) --provider=$(PROVIDER)
 
 up-all:
-	if [ ! -d synced_folder_nfs ]; then \
-		mkdir -v synced_folder_nfs; \
+	if [ ! -d ../synced_folder_nfs ]; then \
+		mkdir -v ../synced_folder_nfs; \
 	fi
 	$(VAGRANT_CMD) up --provider=$(PROVIDER)
 
@@ -27,8 +27,8 @@ halt:
 
 destroy:
 	$(VAGRANT_CMD) destroy --force
-	rm -rf .vagrant
-	rm -rfv synced_folder_nfs/node-token
+	rm -rf ../.vagrant
+	rm -rfv ../synced_folder_nfs/node-token
 
 destroy-box:
 	$(VAGRANT_CMD) box remove $(BOX_NAME) --force
