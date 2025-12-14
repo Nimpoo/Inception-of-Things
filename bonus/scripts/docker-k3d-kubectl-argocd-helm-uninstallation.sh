@@ -98,4 +98,4 @@ rm -v $(which argocd)
 
 # helm uninstallation
 helm repo remove gitlab || true
-sudo rm -v $(which helm)
+rm -v $(which helm)
