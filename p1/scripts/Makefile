@@ -13,14 +13,14 @@ up-all: synced_folder_nfs
 	$(VAGRANT_CMD) up --provider=$(PROVIDER)
 
 synced_folder_nfs:
-	@mkdir -v synced_folder_nfs
+	mkdir synced_folder_nfs
 
 .PHONY: reload
-reload:
+reload: synced_folder_nfs
 	$(VAGRANT_CMD) reload $(VM_NAME)
 
 .PHONY: reload-all
-reload-all:
+reload-all: synced_folder_nfs
 	$(VAGRANT_CMD) reload
 
 .PHONY: halt
@@ -28,9 +28,9 @@ halt:
 	$(VAGRANT_CMD) halt
 
 .PHONY: destroy
-destroy:
+destroy: synced_folder_nfs
 	$(VAGRANT_CMD) destroy --force
-	rm -v synced_folder_nfs/node-token
+	$(RM) synced_folder_nfs/node-token synced_folder_nfs/k3s.yaml
 
 .PHONY: destroy-box
 destroy-box:

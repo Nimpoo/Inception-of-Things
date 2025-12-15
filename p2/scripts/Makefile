@@ -19,7 +19,6 @@ halt:
 .PHONY: destroy
 destroy:
 	$(VAGRANT_CMD) destroy --force
-	rm -rf .vagrant
 
 .PHONY: destroy-all
 destroy-box:
