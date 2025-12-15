@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     type: "nfs",
     nfs_version: 4
 
-	# * Provisioning all VMs
+  # * Provisioning all VMs
   config.vm.provision "upgrade and firewall",
     type: "shell",
     privileged: true,
@@ -51,8 +51,10 @@ Vagrant.configure("2") do |config|
 
       inline: <<-SHELL
       echo "[k3s provision] Installing k3s in controller mode (creation of the cluster)..."
-      curl -sfL https://get.k3s.io | sh -
+      curl -sfL https://get.k3s.io | sh -s - server --write-kubeconfig-mode=644 --flannel-iface=eth1
       cp -fv /var/lib/rancher/k3s/server/node-token /synced_folder_nfs/
+      sed -i 's/127.0.0.1/192.168.56.110/g' /etc/rancher/k3s/k3s.yaml
+      cp -v /etc/rancher/k3s/k3s.yaml /synced_folder_nfs/k3s-config.yaml
       sudo chown -v vagrant:vagrant /etc/rancher/k3s/k3s.yaml
     SHELL
   end
@@ -82,7 +84,12 @@ Vagrant.configure("2") do |config|
 
       export K3S_TOKEN=$(cat /synced_folder_nfs/node-token)
       echo "[k3s provision] Has waited for $SECONDS seconds."
-      curl -sfL https://get.k3s.io | K3S_URL=https://192.168.56.110:6443 K3S_TOKEN=$K3S_TOKEN sh -
+      curl -sfL https://get.k3s.io | sh -s - agent --server=https://192.168.56.110:6443 --token-file=/synced_folder_nfs/node-token --flannel-iface=eth1
+      mkdir -p /home/vagrant/.kube
+      cp -v /synced_folder_nfs/k3s-config.yaml /home/vagrant/.kube/config
+      sudo chown -v vagrant:vagrant /home/vagrant/.kube/config
+      export KUBECONFIG=/home/vagrant/.kube/config
+
     SHELL
   end
 end
