@@ -41,7 +41,7 @@ Your learn how to use [Helm](https://helm.sh/), the "package manager for Kuberne
 # Summary
 1. [Part 1 of the subject](p1/) - From [Chapter I - Vagrant](https://github.com/Nimpoo/Inception-of-Things/wiki/I-%E2%80%90-Vagrant) to [Chapter III - K3s](https://github.com/Nimpoo/Inception-of-Things/wiki/III-%E2%80%90-K3s) in the [wiki](https://github.com/Nimpoo/Inception-of-Things/wiki)
 2. [Part 2 of the subject](p2/) - [Chapter IV - Creation of an app](https://github.com/Nimpoo/Inception-of-Things/wiki/IV-%E2%80%90-Creation-of-an-app) in the [wiki](https://github.com/Nimpoo/Inception-of-Things/wiki)
-3. [Part 1 of the subject](p3/) - [Chapter V - ArgoCD, CI CD, GitOps Model](https://github.com/Nimpoo/Inception-of-Things/wiki/V-%E2%80%90-ArgoCD,-CI-CD,-GitOps-Model) in the [wiki](https://github.com/Nimpoo/Inception-of-Things/wiki)
+3. [Part 3 of the subject](p3/) - [Chapter V - ArgoCD, CI CD, GitOps Model](https://github.com/Nimpoo/Inception-of-Things/wiki/V-%E2%80%90-ArgoCD,-CI-CD,-GitOps-Model) in the [wiki](https://github.com/Nimpoo/Inception-of-Things/wiki)
 4. [Bonus Part](bonus/)
 
 <br />
