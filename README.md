@@ -12,7 +12,6 @@ BUT, it's not just about the tools used, but also the **DevOps notions and conce
 
 We decided not to automate everything completely to avoid losing our correctors during the evaluation defense. We concluded that it would be clearer if we performed the actions during the corrections. However, we could have done it in a more DevOps-friendly manner.
 
-
 The project is divided into 3 parts and a bonus part. Each part teaches you some tools and new concepts to know.
 
 # Part 1 - Vagrant and K3s
