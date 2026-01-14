@@ -1,23 +1,23 @@
 # Inception-of-Things
 
-## This 42 project introduce you the base notions for beginning a DevOps journey.
+## This 42 project introduces you to the basic notions for beginning a DevOps journey.
 
-It's a really good project for having the base of a DevOps. We learn What is [Kubernetes](https://kubernetes.io/), what is [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), [Vagrant](https://developer.hashicorp.com/vagrant), and others...
+It's a really good project for establishing a foundation in DevOps. We learn what [Kubernetes](https://kubernetes.io/), [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), [Vagrant](https://developer.hashicorp.com/vagrant), and others...
 
-BUT, it's not just about the tools used, but also the **DevOps notions and concepts**, like the *GitOps Model*, *CI/CD*, *Pipeline*, etc... Being a DevOps is an art ✨. These notions and concepts are extremly important to know. Without them, It can be really complicated to understand the work of a DevOps. His job is to simplify all the workflow starting to the dev who wants to update its code, and the moment of the code is deployed and running on the productuon environment.
+BUT, it's not just about the tools used, but also the **DevOps notions and concepts**, like the *GitOps Model*, *CI/CD*, *Pipeline*, etc. Being a DevOps professional is an art ✨. These notions and concepts are extremely important to know. Without them, it can be really complicated to understand the work of a DevOps engineer. Their job is to simplify the entire workflow, starting from the developer who wants to update their code, to the moment the code is deployed and running in the production environment.
 
-> ### We read a LOOOOOOT of documentation of this project, and we compiled them in the [<u>wiki section</u>](https://github.com/Nimpoo/Inception-of-Things/wiki) of this repository. The wiki follow the subject, everything is addressed chronologically in relation to the project (parts 1, 2 and 3). Take this [<u>wiki section</u>](https://github.com/Nimpoo/Inception-of-Things/wiki) as a guide/walkthrough for doing the project OR learn about the world of a DevOps (the Bonus Part is not in the wiki).
+> ### We read a LOOOOOOOT of documentation for this project, and we compiled it in the [<u>wiki section</u>](https://github.com/Nimpoo/Inception-of-Things/wiki) of this repository. The wiki follows the subject; everything is addressed chronologically in relation to the project (parts 1, 2, and 3). Take this [<u>wiki section</u>](https://github.com/Nimpoo/Inception-of-Things/wiki) as a guide/walkthrough for doing the project OR learning about the world of DevOps (the Bonus Part is not in the wiki).
 
 ---
 
-We decided to not absolutely automates everything for not losing our correctors during the evaluations defense, we had conclued that will be more clear if we do the action during the corrections. But we could have done it would even be DevOps friendly.
+We decided not to automate everything completely to avoid losing our correctors during the evaluation defense. We concluded that it would be clearer if we performed the actions during the corrections. However, we could have done it in a more DevOps-friendly manner.
 
 
-The project is divided in 3 part, and a bonus part. Each part learn you some tools and new concepts to know.
+The project is divided into 3 parts and a bonus part. Each part teaches you some tools and new concepts to know.
 
 # Part 1 - Vagrant and K3s
 
-This part is the simpler: Create 2 virtual machines with Vagrant, and install K3s in them. One in controller mode, and the other in agent mode.
+This part is the simplest: Create 2 virtual machines with Vagrant and install K3s on them. One in controller mode and the other in agent mode.
 
 In this part, you learn **how to use Vagrant**, and, the most important, **create your first Kubernetes cluster**. Create a Kubernetes cluster imply to know HOW Kubernetes works. This part can be simple, but this is the starting point for understanding Kubernetes.
 
