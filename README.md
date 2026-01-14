@@ -14,25 +14,25 @@ We decided not to automate everything completely to avoid losing our correctors 
 
 The project is divided into 3 parts and a bonus part. Each part teaches you some tools and new concepts to know.
 
-# Part 1 - Vagrant and K3s
+# [Part 1 - Vagrant and K3s](p1/)
 
 This part is the simplest: Create 2 virtual machines with Vagrant and install K3s on them. One in controller mode and the other in agent mode.
 
 In this part, you learn **how to use Vagrant**, and, the most important, **create your first Kubernetes cluster**. Create a Kubernetes cluster imply to know HOW Kubernetes works. This part can be simple, but this is the starting point for understanding Kubernetes.
 
-# Part 2 - Kubernetes Objects, cluster management and multiple application deployment
+# [Part 2 - Kubernetes Objects, cluster management and multiple application deployment](p2/)
 
 This part is more concrete: **deploy 3 web application in your Kubernetes Cluster**. Here, you understand more of WHAT Kubernetes IS USED FOR, and how to manage it after the cluster is created.
 
 Kubernetes comes with a lot of new notions and concept, like *Kubernetes Object*, *Nodes*, *Pod*, etc... And it's the moment to learn more how to manage a Kubernetes Cluster.
 
-# Part 3 - ArgoCD, K3d, GitOps model, and a lot of things
+# [Part 3 - ArgoCD, K3d, GitOps model, and a lot of things](p3/)
 
 This part introduce the concept of **CI/CD** and **GitOps**, and how **ArgoCD is a powerful tool for deploying a new versin of an application**.
 
 Here you will create your first **Continuous Deployement and Delivery Pipeline**. The goal of this part ? Describe your application in a remote repository (GitHub), and watch how the new version of your desired app (declared in your separate repo) is redeployed in your cluster by using ArgoCD: you need to follow the GitOps model.
 
-# Bonus Part - Same as the Part 3, but with a twist
+# [Bonus Part - Same as the Part 3, but with a twist](bonus/)
 
 You need to do the same thing as the previous part, but **your remote repository need to be host in your own Kubernetes Cluster**. Stop using https://github.com, go install your own GitLab instance in your Kubernetes Cluster and host all of your code inside !!!
 
