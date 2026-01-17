@@ -2,6 +2,8 @@
 
 ## This 42 project introduces you to the basic notions for beginning a DevOps journey.
 
+![My parents in there 20s vs me in my 20s](assets/me_in_my_20s.jpg)
+
 It's a really good project for establishing a foundation in DevOps. We learn what [Kubernetes](https://kubernetes.io/), [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), [Vagrant](https://developer.hashicorp.com/vagrant), and others...
 
 BUT, it's not just about the tools used, but also the **DevOps notions and concepts**, like the *GitOps Model*, *CI/CD*, *Pipeline*, etc. Being a DevOps professional is an art ✨. These notions and concepts are extremely important to know. Without them, it can be really complicated to understand the work of a DevOps engineer. Their job is to simplify the entire workflow, starting from the developer who wants to update their code, to the moment the code is deployed and running in the production environment.
